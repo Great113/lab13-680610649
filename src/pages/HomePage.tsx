@@ -1,4 +1,5 @@
 import { Link } from "react-router";
+import "../pages/TodolistPage.css";
 
 export default function HomePage() {
   return (
@@ -7,7 +8,7 @@ export default function HomePage() {
       <p className="text-muted">หน้าแรก — เลือกไปยังหน้าอื่น ๆ ได้จากที่นี่</p>
 
       <div className="d-flex flex-column align-items-center gap-2 mt-4">
-        <Link className="btn btn-primary" to="/my/todolistpage">
+        <Link className="btn buttoncol btnhover" to="/my/todolistpage">
           ไปหน้า Todo List
         </Link>
       </div>

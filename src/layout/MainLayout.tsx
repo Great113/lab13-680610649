@@ -2,13 +2,14 @@ import { Outlet } from "react-router";
 import Sidebar from "../components/Sidebar";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import "../pages/TodolistPage.css";
 export default function MainLayout() {
   return (
-    <div className="container-fluid min-vh-100">
+    <div className="container-fluid min-vh-100 bgcol">
       <div className="row h-100">
         <div className="col-2 col-md-2 p-0">
           {/* Sidebar ซ้าย */}
-          <Sidebar userName="Who are you?" type="student" />
+          <Sidebar userName="Korrawit" type="student" />
         </div>
         <div className="col-10 col-md-10 p-0">
           {/* Header ด้านบน */}
@@ -20,7 +21,11 @@ export default function MainLayout() {
           </main>
 
           {/* Footer ด้านล่าง */}
-          <Footer year="2026" fullName="ชื่อ-สกุล" studentId="รหัสนักศึกษา" />
+          <Footer
+            year="2026"
+            fullName="Korrawit Yawichai"
+            studentId="680610649"
+          />
         </div>
       </div>
     </div>

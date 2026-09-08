@@ -1,0 +1,21 @@
+.bgcolor-sidebar {
+  background: #d18a3e;
+}
+.bgcolor-header {
+  background: #578055;
+}
+.bgcolor-footer {
+  background: #ce8b47;
+}
+.bgcol {
+  background: #bbbab4;
+}
+
+.buttoncol {
+  background-color: #084220;
+  color: #641b27;
+}
+.btnhover:hover {
+  background-color: #a45304;
+  color: #f7f5e4;
+}

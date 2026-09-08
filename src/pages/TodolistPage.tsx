@@ -1,40 +1,57 @@
 import TaskCard from "../components/TaskCard";
 import TodoModal from "../components/Modal";
 import { type TaskCardProps } from "../libs/Todolist";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import "../pages/TodolistPage.css";
+
+const STORAGE_KEY = "lecture13.tasks";
+const defaultTasks: TaskCardProps[] = [];
+
+function loadTasks(): TaskCardProps[] {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    return raw ? JSON.parse(raw) : defaultTasks;
+  } catch {
+    return defaultTasks; // เผื่อข้อมูลใน localStorage เสีย
+  }
+}
 
 function App() {
-  const [tasks, setTasks] = useState<TaskCardProps[]>([]);
+  const [tasks, setTasks] = useState<TaskCardProps[]>(loadTasks);
 
-  const handleAdd = (newTask: TaskCardProps) => {
-    console.log("TODO handleAdd", newTask);
-  };
+  const handleAdd = (newTask: TaskCardProps) => setTasks([...tasks, newTask]);
 
-  const deleteTask = (taskId: string) => {
-    console.log("TODO deleteTask", taskId);
-  };
+  const deleteTask = (taskId: string) =>
+    setTasks(tasks.filter((t) => t.id !== taskId));
 
-  const toggleDoneTask = (taskId: string) => {
-    console.log("TODO toggleDoneTask", taskId);
-  };
+  const toggleDoneTask = (taskId: string) =>
+    setTasks(
+      tasks.map((t) => (t.id === taskId ? { ...t, isDone: !t.isDone } : t)),
+    );
+
+  useEffect(() => {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(tasks));
+  }, [tasks]);
 
   return (
-    <div className="col-12 m-2 p-0">
+    <div className="col-12 m-2 p-0 ">
       <div className="container text-center">
         <h2>Todo List</h2>
-        <span className="m-2">All : () Done : ()</span>
+        <span className="m-2">All : {tasks.length} </span>
+        <span className="m-2">
+          Done : {tasks.filter((t) => t.isDone === true).length}
+        </span>
 
         <div>
           <button
             type="button"
-            className="btn btn-primary my-3"
+            className="btn buttoncol btnhover my-3"
             data-bs-toggle="modal"
             data-bs-target="#todoModal"
           >
             Add
           </button>
         </div>
-
         <TodoModal onAdd={handleAdd} />
         <>
           {tasks.map((task) => (
